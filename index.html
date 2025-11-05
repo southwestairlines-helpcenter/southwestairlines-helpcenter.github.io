@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Southwest Airlines — Book Flights Online</title>
+
+  <!-- Canonical & Basics -->
+  <link rel="canonical" href="https://southwestairlines-helpcenter.github.io/">
+  <meta name="description" content="Book Southwest flights in minutes. Simple, fee-friendly fares, easy changes, and fast support—right on one page." />
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#304CB2" />
+
+  <!-- Favicon (drop your file at /favicon.ico or adjust paths) -->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" href="/icon.png" sizes="any">
+
+  <!-- Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Southwest Airlines — Book Flights Online">
+  <meta property="og:description" content="Search, compare, and book Southwest flights fast. Change-friendly fares and quick support.">
+  <meta property="og:url" content="https://southwestairlines-helpcenter.github.io/">
+  <meta property="og:site_name" content="SouthwestFlyHelp">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://southwestairlines-helpcenter.github.io/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root { color-scheme: light dark; }
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial; }
+
+    /* Southwest-ish palette */
+    .sw-blue   { background-color: #304CB2; }
+    .sw-blue-t { color: #304CB2; }
+    .sw-red    { background-color: #D21F26; }
+    .sw-gold   { background-color: #F9A000; }
+    .sw-gold-t { color:#F9A000; }
+
+    /* Split hero without photo: diagonal stripes + radial glow */
+    .hero-bg {
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(249,160,0,.25), transparent 60%),
+        linear-gradient(135deg, #304CB2 0%, #304CB2 45%, #2a43a0 45%, #2a43a0 55%, #D21F26 55%, #D21F26 58%, #F9A000 58%, #F9A000 62%, #304CB2 62%);
+      background-size: cover;
+    }
+    .glass { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); background-color: rgba(255,255,255,.65); }
+    @media (prefers-color-scheme: dark){ .glass{ background-color: rgba(15,23,42,.65);} }
+
+    /* Unique: pill nav centered + underline on hover */
+    .pill a { border-radius: 9999px; padding:.5rem 1rem; transition: all .2s ease; }
+    .pill a:hover { background: rgba(48,76,178,.08); }
+
+    /* Sticky booking dock (unique vs previous pages) */
+    .dock { position: sticky; top: .75rem; z-index: 20; }
+
+    /* Card hover */
+    .hvr { transition: transform .2s ease, box-shadow .2s ease; }
+    .hvr:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.08); }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(10px); transition: all .6s ease; }
+    .reveal.show { opacity:1; transform: none; }
+  </style>
+
+  <!-- Schema.org: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SouthwestFlyHelp",
+    "url": "https://southwestairlines-helpcenter.github.io/",
+    "logo": "https://southwestairlines-helpcenter.github.io/icon.png"
+  }
+  </script>
+
+  <!-- Schema.org: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"How do I book a Southwest ticket?",
+       "acceptedAnswer":{"@type":"Answer","text":"Tap Book → enter cities, dates and travelers → search → choose Wanna Get Away/Anytime/Business Select → add extras → pay securely → receive your confirmation (PNR) by email."}},
+      {"@type":"Question","name":"Can I change or cancel?",
+       "acceptedAnswer":{"@type":"Answer","text":"Southwest has no change fees. You pay the fare difference if the new flight costs more. Cancellations typically return Travel Funds or points depending on fare."}},
+      {"@type":"Question","name":"When does online check-in open?",
+       "acceptedAnswer":{"@type":"Answer","text":"Online check-in opens 24 hours before departure. Use your confirmation number and name to get your boarding position."}},
+      {"@type":"Question","name":"How does boarding work?",
+       "acceptedAnswer":{"@type":"Answer","text":"Open seating by groups (A, B, C) and positions (1–60). You can buy EarlyBird Check-In or upgrade for a better position when available."}}
+    ]
+  }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
+
+  <!-- Top Ribbon -->
+  <div class="sw-blue text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+      <p class="opacity-90">2 free checked bags • No change fees • 24/7 support</p>
+      <a href="https://southwestairlines-helpcenter.github.io/" class="underline underline-offset-2" target="_blank" rel="noopener">Book now</a>
+    </div>
+  </div>
+
+  <!-- HEADER with centered pill nav -->
+  <header class="border-b border-slate-200/70 dark:border-slate-800/60 bg-white/70 dark:bg-slate-900/60 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-2">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl sw-blue text-white font-bold">SW</span>
+        <span class="font-semibold">Southwest Airlines</span>
+      </a>
+      <nav class="hidden md:flex pill gap-2 text-sm font-medium">
+        <a href="#book">Book</a>
+        <a href="#deals">Deals</a>
+        <a href="#why">Why Southwest</a>
+        <a href="#faqs">FAQs</a>
+        <a href="#support">Support</a>
+      </nav>
+      <a href="https://southwestairlines-helpcenter.github.io/" target="_blank" rel="noopener" class="hidden md:inline-flex px-4 py-2 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-semibold">Book</a>
+      <button id="mBtn" class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Open menu">☰</button>
+    </div>
+    <div id="mMenu" class="md:hidden hidden px-4 pb-3 space-y-1 text-sm">
+      <a class="block py-2" href="#book">Book</a>
+      <a class="block py-2" href="#deals">Deals</a>
+      <a class="block py-2" href="#why">Why Southwest</a>
+      <a class="block py-2" href="#faqs">FAQs</a>
+      <a class="block py-2" href="#support">Support</a>
+    </div>
+  </header>
+
+  <!-- HERO (split layout, no photo asset) -->
+  <section id="home" class="hero-bg">
+    <div class="max-w-7xl mx-auto px-4 py-10 md:py-16 grid md:grid-cols-2 gap-8 items-center">
+      <!-- Left: copy -->
+      <div class="text-white space-y-5">
+        <span class="inline-flex items-center gap-2 bg-white/10 ring-1 ring-white/30 px-3 py-1 rounded-full text-xs font-semibold">No change fees • Free TV</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Book faster. Change easier. Fly happier.</h1>
+        <p class="text-white/90 text-lg">All the essential steps in one page—search, select, check-in help, and quick support.</p>
+        <div class="flex flex-wrap gap-3">
+          <a href="https://southwestairlines-helpcenter.github.io/" target="_blank" rel="noopener" class="px-6 py-3 rounded-full bg-white text-slate-900 font-semibold">Start booking</a>
+          <a href="#deals" class="px-6 py-3 rounded-full border border-white/70 text-white font-semibold">Today’s deals</a>
+        </div>
+      </div>
+
+      <!-- Right: Sticky booking dock (unique) -->
+      <aside id="book" class="dock">
+        <div class="glass rounded-2xl p-4 border border-slate-200/60 dark:border-slate-800/60">
+          <div class="flex items-center justify-between mb-2">
+            <h2 class="font-bold sw-blue-t">Quick Search</h2>
+            <span class="text-xs px-2 py-1 rounded-full bg-black/10 dark:bg-white/10">Demo</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <input id="fromField" class="px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700" placeholder="From (e.g., DAL)">
+            <input id="toField" class="px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700" placeholder="To (e.g., DEN)">
+            <input id="departField" type="date" class="px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700">
+            <input id="returnField" type="date" class="px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700">
+          </div>
+
+          <!-- UPDATED: travelers up to 9 + group 10+ -->
+          <div class="flex items-center gap-2 mt-2">
+            <select id="travelerSelect" class="flex-1 px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700">
+              <option value="1">1 traveler</option>
+              <option value="2">2 travelers</option>
+              <option value="3">3 travelers</option>
+              <option value="4">4 travelers</option>
+              <option value="5">5 travelers</option>
+              <option value="6">6 travelers</option>
+              <option value="7">7 travelers</option>
+              <option value="8">8 travelers</option>
+              <option value="9">9 travelers</option>
+              <option value="10plus">10+ (Group booking)</option>
+            </select>
+            <button id="searchBtn" class="px-4 py-2 rounded-xl sw-gold text-slate-900 font-semibold">Search</button>
+          </div>
+
+          <!-- NEW: Group message -->
+          <div id="groupNote" class="hidden mt-2 text-xs rounded-xl border border-amber-300 bg-amber-50 text-amber-900 p-3 dark:bg-amber-900/20 dark:text-amber-200 dark:border-amber-700">
+            For <strong>10+ travelers</strong>, airlines use group fares with perks (held seats, flexible names).  
+            <a id="groupEmail" class="underline font-semibold" href="mailto:support@southwest.example?subject=Group%20Booking%20Request%20(10%2B%20travelers)&body=Hi%2C%0AWe%20need%20a%20fare%20quote%20for%2010%2B%20travelers.%0AFrom%3A%20%0ATo%3A%20%0ADepart%3A%20%0AReturn%3A%20%0AApprox.%20Passengers%3A%20%0AAny%20notes%3A%20">Request a group quote →</a>
+          </div>
+
+          <p class="mt-2 text-xs text-slate-600 dark:text-slate-400">Tip: Use airport codes to find more options.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- DEALS (horizontal scroll on mobile) -->
+  <section id="deals" class="max-w-7xl mx-auto px-4 py-14 reveal">
+    <div class="flex items-center justify-between">
+      <h2 class="text-2xl md:text-3xl font-bold">Featured deals</h2>
+      <a href="https://southwestairlines-helpcenter.github.io/" target="_blank" rel="noopener" class="sw-blue-t font-semibold">Book →</a>
+    </div>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <article class="hvr rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800/60">
+        <div class="text-sm text-slate-500">from $79</div>
+        <h3 class="text-lg font-semibold">Dallas (DAL) → Denver (DEN)</h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm mt-1">Nonstop • Wanna Get Away</p>
+      </article>
+      <article class="hvr rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800/60">
+        <div class="text-sm text-slate-500">from $99</div>
+        <h3 class="text-lg font-semibold">Phoenix (PHX) → Oakland (OAK)</h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm mt-1">Nonstop • Wanna Get Away Plus</p>
+      </article>
+      <article class="hvr rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-800/60">
+        <div class="text-sm text-slate-500">from $129</div>
+        <h3 class="text-lg font-semibold">Chicago (MDW) → Orlando (MCO)</h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm mt-1">1 stop • Anytime</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- WHY SOUTHWEST -->
+  <section id="why" class="max-w-7xl mx-auto px-4 py-14 reveal">
+    <h2 class="text-2xl md:text-3xl font-bold">Why travelers love Southwest</h2>
+    <div class="mt-6 grid md:grid-cols-3 gap-4">
+      <div class="hvr rounded-2xl p-5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60">
+        <div class="w-10 h-10 rounded-xl sw-gold mb-3"></div>
+        <h3 class="font-semibold">Change-friendly fares</h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm mt-1">No change fees—pay only the fare difference when applicable.</p>
+      </div>
+      <div class="hvr rounded-2xl p-5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60">
+        <div class="w-10 h-10 rounded-xl sw-blue mb-3"></div>
+        <h3 class="font-semibold">2 checked bags fly free</h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm mt-1">Breeze through with more room for your stuff. Weight/size limits apply.</p>
+      </div>
+      <div class="hvr rounded-2xl p-5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60">
+        <div class="w-10 h-10 rounded-xl sw-red mb-3"></div>
+        <h3 class="font-semibold">Open seating</h3>
+        <p class="text-slate-600 dark:text-slate-300 text-sm mt-1">Board by group/position and pick any open seat on the plane.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HELP CENTER -->
+  <section id="faqs" class="max-w-5xl mx-auto px-4 py-14 reveal">
+    <div class="text-center max-w-2xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold">Help Center</h2>
+      <p class="text-slate-600 dark:text-slate-300 mt-2">Booking, changes, boarding, and travel funds explained simply.</p>
+    </div>
+    <div class="mt-8 space-y-3">
+      <details class="group rounded-2xl border border-slate-200 dark:border-slate-800 p-4 bg-white dark:bg-slate-800/60" open>
+        <summary class="cursor-pointer list-none flex items-center justify-between">
+          <span class="font-semibold">How to book</span><span>▾</span>
+        </summary>
+        <ol class="mt-3 space-y-2 text-slate-700 dark:text-slate-300 list-decimal list-inside">
+          <li>Click <strong>Start booking</strong> or use the Quick Search dock.</li>
+          <li>Enter cities, dates, and travelers → <strong>Search</strong>.</li>
+          <li>Choose a fare type (Wanna Get Away, Anytime, Business Select).</li>
+          <li>Add EarlyBird/Upgraded Boarding if you want a better position.</li>
+          <li>Pay securely and receive your confirmation (PNR) by email.</li>
+        </ol>
+      </details>
+
+      <details class="group rounded-2xl border border-slate-200 dark:border-slate-800 p-4 bg-white dark:bg-slate-800/60">
+        <summary class="cursor-pointer list-none flex items-center justify-between">
+          <span class="font-semibold">Changes & cancellations</span><span>▾</span>
+        </summary>
+        <p class="mt-3 text-slate-700 dark:text-slate-300">No change fees; pay fare difference if higher. Cancellations typically return Travel Funds/points depending on fare. Check fare rules at checkout.</p>
+      </details>
+
+      <details class="group rounded-2xl border border-slate-200 dark:border-slate-800 p-4 bg-white dark:bg-slate-800/60">
+        <summary class="cursor-pointer list-none flex items-center justify-between">
+          <span class="font-semibold">Boarding & seating</span><span>▾</span>
+        </summary>
+        <p class="mt-3 text-slate-700 dark:text-slate-300">Groups A/B/C with positions 1–60; open seating. Check in at T-24 or use EarlyBird/Upgraded Boarding.</p>
+      </details>
+
+      <details class="group rounded-2xl border border-slate-200 dark:border-slate-800 p-4 bg-white dark:bg-slate-800/60">
+        <summary class="cursor-pointer list-none flex items-center justify-between">
+          <span class="font-semibold">Baggage basics</span><span>▾</span>
+        </summary>
+        <ul class="mt-3 list-disc list-inside text-slate-700 dark:text-slate-300">
+          <li>2 checked bags fly free (size/weight limits apply).</li>
+          <li>1 carry-on + 1 personal item standard.</li>
+          <li>Special items may have additional rules.</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section id="support" class="max-w-7xl mx-auto px-4 py-14 reveal">
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="md:col-span-2">
+        <h2 class="text-2xl md:text-3xl font-bold">Need help?</h2>
+        <p class="text-slate-600 dark:text-slate-300 mt-2">Chat with us or email <a class="sw-blue-t font-semibold" href="mailto:support@southwest.example">support@southwest.example</a>.</p>
+        <div class="mt-6 grid sm:grid-cols-3 gap-3">
+          <a class="px-4 py-3 rounded-xl text-white text-center font-semibold sw-blue" href="https://southwestairlines-helpcenter.github.io/" target="_blank" rel="noopener">Manage / Cancel</a>
+          <a class="px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-center" href="#faqs">Refunds & Policies</a>
+          <a class="px-4 py-3 rounded-xl text-white text-center font-semibold sw-gold" href="https://southwestairlines-helpcenter.github.io/" target="_blank" rel="noopener">Check-in Help</a>
+        </div>
+      </div>
+      <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 bg-white dark:bg-slate-800/60">
+        <h3 class="font-semibold">Quick links</h3>
+        <ul class="mt-3 space-y-2 text-slate-600 dark:text-slate-300">
+          <li><a class="hover:underline" href="https://southwestairlines-helpcenter.github.io/" target="_blank" rel="noopener">Book ticket</a></li>
+          <li><a class="hover:underline" href="#why">Why Southwest</a></li>
+          <li><a class="hover:underline" href="#faqs">Travel requirements</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-8 text-center text-sm text-slate-500">
+    <div class="max-w-7xl mx-auto px-4">
+      © <span id="year"></span> SouthwestFlyHelp. Demo for educational purposes.
+      <div class="mt-2 text-xs">
+        <strong>Disclaimer:</strong> This website is for informational and educational purposes only. It is not affiliated with or endorsed by Southwest Airlines. No real bookings or payments are processed here.
+      </div>
+    </div>
+  </footer>
+
+  <!-- LEFT-SLIDE CHAT (unique placement) -->
+  <button id="chatToggle" class="fixed bottom-6 left-6 z-40 rounded-full p-4 text-white shadow-lg hover:shadow-xl focus:outline-none sw-blue" aria-label="Open chat">💬</button>
+  <div id="chatPanel" class="fixed bottom-24 left-6 w-[min(92vw,380px)] max-h-[70vh] hidden z-40 rounded-2xl overflow-hidden shadow-xl">
+    <div class="glass border border-slate-200/60 dark:border-slate-800/60">
+      <header class="px-4 py-3 flex items-center justify-between">
+        <div class="font-semibold">Southwest Assistant</div>
+        <button id="chatClose" class="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close chat">✕</button>
+      </header>
+      <div id="chatLog" class="px-4 py-3 space-y-3 overflow-y-auto" style="max-height: 52vh">
+        <div class="text-sm text-slate-500">Ask about <span class="font-medium">booking, changes, boarding, and baggage</span>.</div>
+      </div>
+      <form id="chatForm" class="p-3 border-t border-slate-200/60 dark:border-slate-800/60 flex items-center gap-2" onsubmit="chatReply(event)">
+        <input id="chatInput" class="flex-1 px-3 py-2 rounded-xl border border-slate-300/70 dark:border-slate-700 bg-white/80 dark:bg-slate-800/60 focus:outline-none" placeholder="Type your question…" />
+        <button class="px-3 py-2 rounded-xl text-white font-semibold sw-blue">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Mobile menu
+    const mBtn = document.getElementById('mBtn');
+    const mMenu = document.getElementById('mMenu');
+    if (mBtn) mBtn.addEventListener('click', () => mMenu.classList.toggle('hidden'));
+
+    // Year
+    const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} })
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Chat
+    const chatToggle = document.getElementById('chatToggle');
+    const chatPanel  = document.getElementById('chatPanel');
+    const chatClose  = document.getElementById('chatClose');
+    const chatLog    = document.getElementById('chatLog');
+
+    function addBubble(text, me=false){
+      const wrap = document.createElement('div');
+      wrap.className = 'flex ' + (me ? 'justify-end' : 'justify-start');
+      const bubble = document.createElement('div');
+      bubble.className = 'max-w-[80%] px-3 py-2 rounded-2xl ' + (me ? 'sw-blue text-white rounded-br-md' : 'bg-slate-100 dark:bg-slate-800');
+      bubble.textContent = text;
+      wrap.appendChild(bubble);
+      chatLog.appendChild(wrap);
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
+    function answerFor(text){
+      const s = text.toLowerCase();
+      if (s.includes('book')) return 'To book: use the Quick Search dock → choose a fare → add extras → pay → get your confirmation by email.';
+      if (s.includes('change') || s.includes('cancel')) return 'No change fees. You only pay any fare difference. Cancellations typically return Travel Funds/points based on fare.';
+      if (s.includes('board') || s.includes('boarding')) return 'Open seating: groups A/B/C with positions 1–60. Check in at T-24 or use EarlyBird/Upgraded Boarding.';
+      if (s.includes('bag') || s.includes('baggage') || s.includes('luggage')) return 'Bags: 2 checked bags fly free (limits apply). 1 carry-on + 1 personal item standard.';
+      if (s.includes('check-in') || s.includes('check in')) return 'Online check-in opens 24h before departure. Use your confirmation code and last name.';
+      return 'I can help with booking, changes, boarding, and baggage. Try: “How does boarding work?”';
+    }
+
+    function chatReply(e){
+      e.preventDefault();
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim(); if (!text) return;
+      addBubble(text, true);
+      setTimeout(()=> addBubble(answerFor(text)), 250);
+      input.value='';
+    }
+    chatToggle.addEventListener('click', ()=> chatPanel.classList.toggle('hidden'));
+    chatClose.addEventListener('click', ()=> chatPanel.classList.add('hidden'));
+
+    // --- Travelers: 1–9 + 10+ group handling ---
+    const travelerSelect = document.getElementById('travelerSelect');
+    const groupNote = document.getElementById('groupNote');
+    const searchBtn = document.getElementById('searchBtn');
+
+    function updateGroupUI() {
+      const isGroup = travelerSelect.value === '10plus';
+      groupNote.classList.toggle('hidden', !isGroup);
+      // Visual cue on button
+      if (isGroup) {
+        searchBtn.textContent = 'Request Group Quote';
+      } else {
+        searchBtn.textContent = 'Search';
+      }
+    }
+    updateGroupUI();
+    travelerSelect.addEventListener('change', updateGroupUI);
+
+    searchBtn.addEventListener('click', () => {
+      const isGroup = travelerSelect.value === '10plus';
+      if (isGroup) {
+        // build mailto with current form fields
+        const from = encodeURIComponent(document.getElementById('fromField').value || '');
+        const to = encodeURIComponent(document.getElementById('toField').value || '');
+        const depart = encodeURIComponent(document.getElementById('departField').value || '');
+        const ret = encodeURIComponent(document.getElementById('returnField').value || '');
+        const subject = encodeURIComponent('Group Booking Request (10+ travelers)');
+        const body = encodeURIComponent(
+`Hi,
+We need a fare quote for 10+ travelers.
+From: ${decodeURIComponent(from)}
+To: ${decodeURIComponent(to)}
+Depart: ${decodeURIComponent(depart)}
+Return: ${decodeURIComponent(ret)}
+Approx. Passengers: 10+
+Any notes: `
+        );
+        window.location.href = `mailto:support@southwest.example?subject=${subject}&body=${body}`;
+      } else {
+        // normal demo redirect
+        window.location.href = 'https://southwestairlines-helpcenter.github.io/';
+      }
+    });
+  </script>
+</body>
+</html>
